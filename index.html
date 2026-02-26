@@ -549,9 +549,7 @@ footer {
   <p class="tag">Ready?</p>
   <h2>Stop wasting your <span class="em">potential.</span></h2>
   <p class="cta-p">Join the waitlist. Be first in line when Deric launches.</p>
-  <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-wrap" id="waitlist-form">
-    <input type="hidden" name="form-name" value="waitlist" />
-    <p style="display:none;"><input name="bot-field" /></p>
+  <form action="https://formspree.io/f/mgoldkra" method="POST" class="form-wrap" id="waitlist-form">    
     <input class="form-in" type="email" name="email" placeholder="your@email.com" id="email-in" required>
     <button type="submit" class="btn-fill">I'm In</button>
   </form>
@@ -634,10 +632,10 @@ document.getElementById('waitlist-form').addEventListener('submit', function(e) 
     setTimeout(() => document.getElementById('email-in').style.borderColor = '', 1500);
     return;
   }
-  fetch('/', {
+  fetch('https://formspree.io/f/mgoldkra', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(form)).toString()
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
   }).then(() => {
     document.getElementById('email-in').value = '';
     confetti();
